@@ -37,7 +37,7 @@ voyage(X,Temps):-
         retract(temps_courant(Fromage)),
         assert(temps_courant(Temps)),
         regarder, !.
-voyage(_,_):-write("la voiture n'est pas alimenté"), false, !.
+voyage(_,_):-write("la voiture n'est pas alimentée"), false, !.
 
 % position du joueur. Ce pr�dicat sera modifié au fur et a mesure de la partie (avec `retract` et `assert`)
 position_courante(usmb_cours).
@@ -247,25 +247,21 @@ decrire(lama) :- temps_courant(passe),
 
 decrire(quattreCanton) :- temps_courant(passe),
     write("garet du passé zizi"), nl,
-    write(""), nl,
-    !
-    .
+    write("zizi"), nl,!.
 decrire(polytech) :- temps_courant(passe),
-    write("ne me parle pas je cherche un algo mal fait pour ma machine a calculer"), nl,
-    !
-    .
+    write("ne me parle pas je cherche un algo mal fait pour ma machine a calculer"), nl,!.
+
 decrire(polytech) :- temps_courant(passe),position(zizi,en_main),
-    write("salut, mais cet un superbe algo de tri peut tu me le <<jiver>>"), nl,
-    write("ha merci maintenant plus qu'a attendre quelque temps"), nl,
-    !
-    .
+    write("salut, mais c'est un superbe algo de tri que je vois la?! donne le moi ! j'en ai besoin pour trier les eleves par leurs moyenne!"),nl,
+    write("Sacreubleux! La liste etait semi-triee ... l'algorithme degenere..'"),nl,
+    write("Mon ordinateur ne repond plus... revient plus tard.. l'ordinateur aura peut-etre fini ses calculs.."),nl,!.
 
 % descriptions des emplacements du present
 decrire(usmb_cours) :- temps_courant(present),
     write("vous vous trouvez dans la cours de l usmb"), nl,
     write("vous appercevez marty, accompagne de son fidele compagnon le boussion-ardent, non loin de sa doloreane"), nl,!.
 
-ecrire(lama):- temps_courant(present),position(resultat,en_main),
+decrire(lama):- temps_courant(present),position(resultat,en_main),
         write("vous avez les resultats bravos prenez ceci, ce parchemin vous aidera"), nl,
         !
         .
@@ -273,7 +269,7 @@ ecrire(lama):- temps_courant(present),position(resultat,en_main),
 decrire(lama):- temps_courant(present),
         write("Vous arrivez dans ce prestigieux laboratoire. Vous appercevez M. Hyvernat devant la machine a caffe"), nl,
         write("il arrive devant vous avec un papier a la main"),nl,
-        write("il dit: je sais ce que tu fait, je peu détecter les anomalies logiques"), nl,
+        write("il dit: je sais ce que tu fais, je peux détecter les anomalies logiques"), nl,
         write("tu joue a un jeu dangereux la fac n'as pas toujours été un lieu de paix"), nl,
         write("prend cet algo puisque tu te lance dans cette aventure vas donner ca a un etudiant de polytech promo:1950"), nl,
         !
@@ -283,14 +279,14 @@ decrire(quattreCanton):-temps_courant(present),
         write("vous entrez dans en 4canton, vous appercevez garet faisant peur au l1"), nl,
         write("garet vous appercois et vous demande de venir"),nl,
         write("je sais ce que tu cherche je le possedait autrefois mais je lai perdu"),nl,
-        write("si tu compte aller le chercher prend garde, je n'ai toujour été prof"),nl,
+        write("si tu compte aller le chercher prends garde, je n'ai toujour été un simple prof"),nl,
         !
         .
 
 decrire(huitB):-temps_courant(present),position(code_secret_1,en_main),position(code_secret_2,en_main),
-        write("comment a tu eu ce code!"), nl,
+        write("comment a tu eu ce code!?"), nl,
         write("tu ne dois pas rester la"), nl,
-        write("je ne peux pas t'aider, t'as seule chance c'est de revenir plustard, bien plustard"), nl,
+        write("je ne peux pas t'aider, ta seule chance c'est de revenir plustard, bien plustard"), nl,
         !
         .
 
@@ -373,7 +369,7 @@ decrire(copies_dun_ancien_temps):-
 decrire(copies_d_algorithmique):-
         write("Ces copies sont vierges.."),nl,
         write("Les eleves ne peuvent pas avoir tous rendu feuille blanche?.."),
-        write("n'es-ce pas?.. n'es-ce pas??")nl.
+        write("n'es-ce pas?.. n'es-ce pas??"),nl.
 
 decrire(copies_grammaire_automates):-
         write("Oulala j'ai jamais rien compris au regex moi!"),nl,
