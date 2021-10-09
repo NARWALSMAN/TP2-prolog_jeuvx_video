@@ -26,7 +26,7 @@ est_dans_liste(copies_systeme_dexploitation):-true,!.
 est_dans_liste(copies_pourraves):-true,!.
 est_dans_liste(copies_grammaire_automates):-true,!.
 est_dans_liste(copies_d_algorithmique):-true,!.
-est_dans_liste(_):-write("tu ne peux pas mettre �a!"), false, !.
+est_dans_liste(_):-write("tu ne peux pas mettre ca!"), false, !.
 %Temporalit� du joueur. Ce predicat sert a definir dans quelle timeline le joueur se trouve
 temps_courant(present).
 voyage(X,Temps):-
@@ -39,7 +39,7 @@ voyage(X,Temps):-
         regarder, !.
 voyage(_,_):-write("la voiture n'est pas alimenté"), false, !.
 
-% position du joueur. Ce pr�dicat sera modifié au fur et é mesure de la partie (avec `retract` et `assert`)
+% position du joueur. Ce pr�dicat sera modifié au fur et a mesure de la partie (avec `retract` et `assert`)
 position_courante(usmb_cours).
 
 %utiliser objet
@@ -179,8 +179,6 @@ lister_objets(Place) :-
 
 lister_objets(_).
 
-% add_tail(+List,+Element,-List)
-% Add the given element to the end of the list, without using the "append" predicate.
 
 % fin de partie
 fin :-
@@ -320,7 +318,7 @@ decrire(copies_systeme_dexploitation):-
 %copies du futur%
 decrire(copies_dun_ancien_temps):-
         write("Ahh, les annees bissextiles.. je me rappelle de cette matiere.."),nl,
-        write("Ce sont des copies d'info101'.. La bonne époque"),nl.
+        write("Ce sont des copies d'info101'.. La bonne epoque"),nl.
 
 decrire(copies_d_algorithmique):-
         write("Ces copies sont vierges.."),nl,
@@ -329,5 +327,5 @@ decrire(copies_d_algorithmique):-
 
 decrire(copies_grammaire_automates):-
         write("Oulala j'ai jamais rien compris au regex moi!"),nl,
-        write("Vivement la fin de l'année j'en peux plus moi de tout ça"),nl,
+        write("Vivement la fin de l'année j'en peux plus moi de tout ça.."),nl,
         write("je préfèrerais faire une license option prolog"),nl. 
