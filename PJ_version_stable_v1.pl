@@ -20,16 +20,19 @@
 :- op(1000, fx, lacher).
 :- op(1000, fx, aller).
 
-
+est_dans_liste(tri_par_bulle):-true,!.
+est_dans_liste(_):-write("tu ne peux pas mettre ça!"), false, !.
 %Temporalité du joueur. Ce predicat sert a definir dans quelle timeline le joueur se trouve
 temps_courant(present).
-voyage(Temps):-
+voyage(X,Temps):-
         temps_courant(Fromage),
-        utiliser(tri_par_bulle),
-        decrire(tri_par_bulle),
+        est_dans_liste(X),
+        utiliser(X),
+        decrire(X),
         retract(temps_courant(Fromage)),
         assert(temps_courant(Temps)),
         regarder, !.
+voyage(_,_):-write("la voiture n'est pas alimenté"), false, !.
 
 % position du joueur. Ce prédicat sera modifié au fur et à mesure de la partie (avec `retract` et `assert`)
 position_courante(usmb_cours).
@@ -45,6 +48,7 @@ utiliser(X):-
         write(X), 
         write("dans votre main"),
         !.
+
 
 % passages entre les différent endroits du jeu
 
@@ -160,6 +164,8 @@ lister_objets(Place) :-
 
 lister_objets(_).
 
+% add_tail(+List,+Element,-List)
+% Add the given element to the end of the list, without using the "append" predicate.
 
 % fin de partie
 fin :-
@@ -194,7 +200,6 @@ jouer :-
         write("Votre mission, Si vous l acceptez est de parcourir les différentes époques"), nl,
         write("afin de retrouver les algorithmes de tri permettant d écrêmer la license."), nl,nl,
         regarder.
-
 % descriptions des emplacements du passé
 decrire(usmb_cours) :- temps_courant(passe),
     write("SMEGMA"), nl,
