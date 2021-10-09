@@ -47,6 +47,7 @@ utiliser(X):-
         position(X,en_main),
         retract(position(X, en_main)),
         assert(position(X, vide)),
+        decrire(X),
         !.
 utiliser(X):-
         write("je ne vois pas de "),
@@ -263,26 +264,26 @@ decrire(usmb_cours) :- temps_courant(futur),
     !.
 
 decrire(lama):- temps_courant(futur),
-    write("Vous arrivez dans ce vetistute laboratoire. la machine a caff�est cass� "), nl,
-    write("M hyvernat est dans son bureau a corriger des copie de scratch"), nl,
+    write("Vous arrivez dans ce vetuste laboratoire. la machine a caffe est cassee "), nl,
+    write("M hyvernat est dans son bureau, il semble etre en train de reparer tplab"), nl,
     !.
 decrire(quattreCanton):- temps_courant(futur),
-    write("vous arriver dans les tr�s vieux batiment de l'univ"), nl,
-    write("mais pour une foix ces batiment sont raccord avec le reste de l'univ"), nl,
-    write("on y appercois garret toujours en train de cermoner les l1:"), nl,
-    write("defaillant au tp, d�faillant au semestre d�faillant a l'ann�e, on est d'accord?"), nl,
+    write("vous arrivez devant ces vieux batiments de l'universite"), nl,
+    write("Ces batiments ont mieux vieillit que les autres.."), nl,
+    write("on y appercoit M.Garet en train de cermoner les L1:"), nl,
+    write("defaillant au tp, defaillant a l'UE, deffaillant au semestre, defaillant a l'annee, on est d'accord?"), nl,
     write("...on est d'accord."),
     write("il vous interpelle et vous dit:"),
     write("zizi"),
     nl,
     !.
 decrire(huitB):- temps_courant(futur),
-    write("dernier grand batiment de cette universit� qui n'a pas encore �t� d�truit"), nl,
-    write("on y voit jol sur sont projet scret le fameux c+++"), nl,
+    write("dernier grand batiment de cette université qui n'a pas encore ete detruit"), nl,
+    write("on y voit jol travailler sur son projet secret, le fameux c+++"), nl,
     !.
 decrire(polytech):- temps_courant(futur),
     write("polytech est devenu un champ de ruine depuis les incidents du tp3 de logique"), nl,
-    write("wental est en train de d�velloper une applis mobile pour partir d'ici"), nl,
+    write("M.Wayntal est en train de develloper une progressive Web-app pour partir d'ici"), nl,
     !.
 
 decrire(modele_osi):-position_courante(lama),temps_courant(present),
@@ -293,10 +294,11 @@ decrire(modele_osi):-position_courante(lama),temps_courant(present),
 decrire(tri_par_bulle):-position_courante(lama),temps_courant(present),
         write("Cet Algorithme de tri, bien que de complexit� constante n2"),nl,
         write("doit etre utilis� avec jugeotte! Dans le cas contraire"),nl,
-        write("la situation risquerait de d�g�n�rer"),nl.
+        write("la situation risquerait de degenerer"),nl.
 decrire(tri_par_bulle):-position(tri_par_bulle,vide),
-        write("tu as mit le tri par bulle dans la dolorean"),nl,
-        write("nous pouvons partir!!! en route!"),nl.
+        write("Vous donnez l'algorithme a M.Waytal"),nl,
+        write("Vous le voyez ecrire des lignes de commandes"),nl,
+        write("sudo Hack tri_par_bulle(liste_etu_2021_2022)"),nl.
 
 %copies d'�tudiants%
 
@@ -328,4 +330,4 @@ decrire(copies_d_algorithmique):-
 decrire(copies_grammaire_automates):-
         write("Oulala j'ai jamais rien compris au regex moi!"),nl,
         write("Vivement la fin de l'année j'en peux plus moi de tout ça"),nl,
-        write("je préfèrerais faire une license option prolog"),nl.
+        write("je préfèrerais faire une license option prolog"),nl. 
