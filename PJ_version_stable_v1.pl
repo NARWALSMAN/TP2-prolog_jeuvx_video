@@ -1,6 +1,6 @@
-%%% INFO-501, TP3
-%%% Pierre Hyvernat
-%%%Delifer Paul Guesdon
+%%% INFO-501, TP2
+%%% Enseignant Pierre Hyvernat
+%%%Binome Delifer Paul Guesdon Theo
 %%% Lancez la "requete"
 %%% jouer.
 %%% pour commencer une partie !
