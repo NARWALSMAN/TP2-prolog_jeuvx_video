@@ -21,6 +21,19 @@
 :- op(1000, fx, lacher).
 :- op(1000, fx, aller).
 
+%%nombre de copie
+hasCopie(X):-
+    nombre_de_copie(Nb),
+    Nb>X.
+updateNombreCopie(Delta):-
+    retract(nombre_de_copie(Nb)),
+    NombreCopie is Nb-1,
+    assert(nombre_de_copie(NombreCopie)),
+    NombreCopie <0,
+    updateNombreCopie(Delta),
+        fin.
+
+updateCopie(_).
 
 %Def de liste de copies%
 est_dans_liste(copies_dun_ancien_temps):-true,!.
@@ -42,7 +55,7 @@ voyage(X,Temps):-
 voyage(_,_):-write("la voiture n'est pas alimentée"), false, !. 
 %%
 
-% position du joueur. Ce predicat sera modifié au fur et a mesure de la partie (avec `retract` et `assert`)
+% position du joueur. Ce pr�dicat sera modifié au fur et a mesure de la partie (avec `retract` et `assert`)
 position_courante(usmb_cours).
 
 %utiliser objet
@@ -77,9 +90,9 @@ utiliser(X):-
 % position des objets%
 %%
 %parchemin 1 2 3%
-position_objets(parchemin_1,lama,temps_courant(present)).
-position_objets(parchemin_2,huitB,temps_courant(futur)).
-position_objets(parchemin_3,quatrecanton,temps_courant(passe)).
+position_objets(parchemin1,lama,temps_courant(present)).
+position_objets(parchemin2,huitB,temps_courant(futur)).
+position_objets(parchemin3,quattreCanton,temps_courant(passe)).
 %%
 %code secret%
 position_objets(code_secret_1, lama, passe).
@@ -109,25 +122,24 @@ prendre(X) :-
 prendre(X) :-
         position_courante(P),
         position_objets(X, P, temps_courant(present)),
-        retract(position_objets(X, P, temps_courant(present))),
         assert(position_objets(X, en_main,temps_courant(present))),
-        assert(position(X, en_main)),
+        retract(position_objets(X, P, temps_courant(present))),
         write("OK."), nl,
         decrire(X),
         !.
 prendre(X) :-
         position_courante(P),
         position_objets(X, P, temps_courant(passe)),
-        retract(position_objets(X, P, temps_courant(passe))),
         assert(position_objets(X, en_main,temps_courant(passe))),
+        retract(position_objets(X, P, temps_courant(passe))),
         write("OK."), nl,
         decrire(X),
         !.
 prendre(X) :-
         position_courante(P),
         position_objets(X, P, temps_courant(futur)),
-        retract(position_objets(X, P, temps_courant(futur))),
         assert(position_objets(X, en_main,temps_courant(futur))),
+        retract(position_objets(X, P, temps_courant(futur))),
         write("OK."), nl,
         decrire(X),
         !.
@@ -229,12 +241,6 @@ decrire(usmb_cours) :- temps_courant(passe),
     write("la base est remplie de soldat"), nl,
     !
     .
-
-decrire(lama) :- temps_courant(passe),position(copies_pourraves,vide),
-    write("tri par bulle vide"), nl,
-    write(""), nl,
-    !
-    .
 decrire(lama) :- temps_courant(passe),
     write("vous vous trouvez dans le nouveau laboratoire scientifique dernier cri"), nl,
     write("le fleuron des mathématiques françaises"), nl,
@@ -249,14 +255,16 @@ decrire(quattreCanton) :- temps_courant(passe),
     write("Vous arrivez en 4 Canton, vous y appercevez des militaires se faisant cermoner par.."), nl,
     write("M. Garet ? Il est entrain de cermoner les nouvelles recrues.. Son speech me dit quelque chose.."), nl,
     write("Deserteur au menage. Deserteur au bataillon. Deserteur a l'armee. Deserteur au cachot"),nl,
-    write("On est d'accord?"),nl,!.
-decrire(polytech) :- temps_courant(passe),
-    write("ne me parle pas je cherche un algo mal fait pour ma machine a calculer"), nl,!.
-
-decrire(polytech) :- temps_courant(passe),position(tri_par_bulle,en_main),
+    write("On est d'accord?"),nl,
+    !.
+decrire(polytech) :- position_objets(tri_par_bulle,en_main,temps_courant(passe)),
     write("salut, mais c'est un superbe algo de tri que je vois la?! donne le moi ! j'en ai besoin pour trier les eleves par leurs moyenne!"),nl,
     write("Sacreubleux! La liste etait semi-triee ... l'algorithme degenere..'"),nl,
-    write("Mon ordinateur ne repond plus... revient plus tard.. l'ordinateur aura peut-etre fini ses calculs.."),nl,!.
+    write("Mon ordinateur ne repond plus... revient plus tard.. l'ordinateur aura peut-etre fini ses calculs.."),nl,
+    !.
+
+decrire(polytech) :- temps_courant(passe),
+    write("ne me parle pas je cherche un algo mal fait pour ma machine a calculer"), nl,!.
 
 % descriptions des emplacements du present
 decrire(usmb_cours) :- temps_courant(present),
