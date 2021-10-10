@@ -10,6 +10,7 @@
 :- dynamic position/2, position_courante/1.
 :- dynamic doloreane/2, temps_courant/1.
 :- dynamic position/3, position_courante/1.
+:- dynamic nombre_de_copie/1.
 % on remet a jours les positions des objets et du joueur
 :- retractall(position(_, _)), retractall(position_courante(_)).
 :- retractall(doloreane(_, _)), retractall(temps_courant(_)).
@@ -19,6 +20,21 @@
 :- op(1000, fx, prendre).
 :- op(1000, fx, lacher).
 :- op(1000, fx, aller).
+
+%%nombre de copie
+hasCopie(X):-
+	nombre_de_copie(Nb),
+	Nb>X.
+updateNombreCopie(Delta):-
+	retract(nombre_de_copie(Nb)),
+	NombreCopie is Nb-1,
+	assert(nombre_de_copie(NombreCopie)),
+	NombreCopie <0,
+	updateNombreCopie(Delta),
+        fin.
+
+updateCopie(_).
+
 %Def de liste de copies%
 est_dans_liste(copies_dun_ancien_temps):-true,!.
 est_dans_liste(copies_pourraves):-true,!.
@@ -348,7 +364,7 @@ decrire(tri_par_bulle):-position_courante(lama),temps_courant(present),
 decrire(tri_par_bulle):-position(tri_par_bulle,vide),
         write("Vous donnez l'algorithme a M.Waytal"),nl,
         write("Vous le voyez ecrire des lignes de commandes"),nl,
-        write("sudo Hack tri_par_bulle(liste_etu_2021_2022)"),nl.
+        write("sudo Hack tri_par_bulle(liste_etu_2021_2022)> liste_triee"),nl.
 
 decrire(resultat):-write("Ce sont les resultats du tri realise sur la liste des etudiants."),nl,
 ,write("je ne vois pas mon nom dessus? Ce doit etre une erreur.. n'es-ce pas?"),nl.
