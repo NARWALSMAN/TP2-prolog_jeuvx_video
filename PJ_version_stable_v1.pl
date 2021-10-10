@@ -37,7 +37,8 @@ voyage(X,Temps):-
         retract(temps_courant(Fromage)),
         assert(temps_courant(Temps)),
         regarder, !.
-voyage(_,_):-write("la voiture n'est pas alimentée"), false, !.
+voyage(_,_):-write("la voiture n'est pas alimentée"), false, !. 
+%'%
 
 % position du joueur. Ce pr�dicat sera modifié au fur et a mesure de la partie (avec `retract` et `assert`)
 position_courante(usmb_cours).
@@ -246,12 +247,14 @@ decrire(lama) :- temps_courant(passe),
     .
 
 decrire(quattreCanton) :- temps_courant(passe),
-    write("garet du passé zizi"), nl,
-    write("zizi"), nl,!.
+    write("Vous arrivez en 4 Canton, vous y appercevez des militaires se faisant cermoner par.."), nl,
+    write("M. Garet ? Il est entrain de cermoner les nouvelles recrues.. Son speech me dit quelque chose.."), nl,
+    write(" "Deserteur au menage. Deserteur au bataillon. Deserteur a l'armee. Deserteur au cachot" "),nl,
+    write("On est d'accord?"),nl,!.
 decrire(polytech) :- temps_courant(passe),
     write("ne me parle pas je cherche un algo mal fait pour ma machine a calculer"), nl,!.
 
-decrire(polytech) :- temps_courant(passe),position(zizi,en_main),
+decrire(polytech) :- temps_courant(passe),position(tri_par_bulle,en_main),
     write("salut, mais c'est un superbe algo de tri que je vois la?! donne le moi ! j'en ai besoin pour trier les eleves par leurs moyenne!"),nl,
     write("Sacreubleux! La liste etait semi-triee ... l'algorithme degenere..'"),nl,
     write("Mon ordinateur ne repond plus... revient plus tard.. l'ordinateur aura peut-etre fini ses calculs.."),nl,!.
@@ -262,7 +265,7 @@ decrire(usmb_cours) :- temps_courant(present),
     write("vous appercevez marty, accompagne de son fidele compagnon le boussion-ardent, non loin de sa doloreane"), nl,!.
 
 decrire(lama):- temps_courant(present),position(resultat,en_main),
-        write("vous avez les resultats bravos prenez ceci, ce parchemin vous aidera"), nl,
+        write("vous avez la nouvelle liste des etudiants? bravos prenez ceci, ce hashcode vous aidera dans votre quete"), nl,
         !
         .
 
@@ -270,8 +273,8 @@ decrire(lama):- temps_courant(present),
         write("Vous arrivez dans ce prestigieux laboratoire. Vous appercevez M. Hyvernat devant la machine a caffe"), nl,
         write("il arrive devant vous avec un papier a la main"),nl,
         write("il dit: je sais ce que tu fais, je peux détecter les anomalies logiques"), nl,
-        write("tu joue a un jeu dangereux la fac n'as pas toujours été un lieu de paix"), nl,
-        write("prend cet algo puisque tu te lance dans cette aventure vas donner ca a un etudiant de polytech promo:1950"), nl,
+        write("tu joues a un jeu dangereux la fac n'as pas toujours été un lieu de paix"), nl,
+        write("prend cet algo puisque tu te lances dans cette aventure! Vas donner ca a un etudiant de polytech promo:1950"), nl,
         !
         .
 
@@ -286,14 +289,13 @@ decrire(quattreCanton):-temps_courant(present),
 decrire(huitB):-temps_courant(present),position(code_secret_1,en_main),position(code_secret_2,en_main),
         write("comment a tu eu ce code!?"), nl,
         write("tu ne dois pas rester la"), nl,
-        write("je ne peux pas t'aider, ta seule chance c'est de revenir plustard, bien plustard"), nl,
+        write("je ne peux pas t'aider, ta seule chance c'est de revenir plus tard, bien plus tard"), nl,
         !
         .
 
 decrire(huitB):-temps_courant(present),
-        write("ne rentre pas j'ai du travail"), nl,
-        !
-        .
+        write("Vous arrivez dans les batiments 8B, Jacques-Olivier Lachaud dispense un cours de VISI201"), nl,
+        write("Mieux vaut ne pas le deranger ces CMI ont l'air largués..."),nl,!.
 
 decrire(polytech):-temps_courant(present),
         write("que fait tu ici?"), nl,
@@ -336,14 +338,16 @@ decrire(modele_osi):-position_courante(lama),temps_courant(present),
         write("Ce modele pourrait interesser M.Garet"),nl.
 %%Il faudrait amener lalgo de tri par bulle e hyvernat%%
 decrire(tri_par_bulle):-position_courante(lama),temps_courant(present),
-        write("Cet Algorithme de tri, bien que de complexit� constante n2"),nl,
-        write("doit etre utilis� avec jugeotte! Dans le cas contraire"),nl,
+        write("Cet Algorithme de tri, bien que de complexite constante n2"),nl,
+        write("doit etre utilise avec jugeotte! Dans le cas contraire"),nl,
         write("la situation risquerait de degenerer"),nl.
 decrire(tri_par_bulle):-position(tri_par_bulle,vide),
         write("Vous donnez l'algorithme a M.Waytal"),nl,
         write("Vous le voyez ecrire des lignes de commandes"),nl,
         write("sudo Hack tri_par_bulle(liste_etu_2021_2022)"),nl.
 
+decrire(resultat):-write("Ce sont les resultats du tri realise sur la liste des etudiants."),nl,
+,write("je ne vois pas mon nom dessus? Ce doit etre une erreur.. n'es-ce pas?"),nl.
 %copies detudiants%
 
 
@@ -374,4 +378,5 @@ decrire(copies_d_algorithmique):-
 decrire(copies_grammaire_automates):-
         write("Oulala j'ai jamais rien compris au regex moi!"),nl,
         write("Vivement la fin de l'année j'en peux plus moi de tout ça.."),nl,
-        write("je préfèrerais faire une license option prolog"),nl. 
+        write("je préfèrerais faire une license option prolog"),nl.
+
