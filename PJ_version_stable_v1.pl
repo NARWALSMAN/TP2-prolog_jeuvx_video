@@ -23,14 +23,14 @@
 
 %%nombre de copie
 hasCopie(X):-
-	nombre_de_copie(Nb),
-	Nb>X.
+    nombre_de_copie(Nb),
+    Nb>X.
 updateNombreCopie(Delta):-
-	retract(nombre_de_copie(Nb)),
-	NombreCopie is Nb-1,
-	assert(nombre_de_copie(NombreCopie)),
-	NombreCopie <0,
-	updateNombreCopie(Delta),
+    retract(nombre_de_copie(Nb)),
+    NombreCopie is Nb-1,
+    assert(nombre_de_copie(NombreCopie)),
+    NombreCopie <0,
+    updateNombreCopie(Delta),
         fin.
 
 updateCopie(_).
@@ -263,7 +263,7 @@ decrire(lama) :- temps_courant(passe),
 decrire(quattreCanton) :- temps_courant(passe),
     write("Vous arrivez en 4 Canton, vous y appercevez des militaires se faisant cermoner par.."), nl,
     write("M. Garet ? Il est entrain de cermoner les nouvelles recrues.. Son speech me dit quelque chose.."), nl,
-    write(" "Deserteur au menage. Deserteur au bataillon. Deserteur a l'armee. Deserteur au cachot" "),nl,
+    write("Deserteur au menage. Deserteur au bataillon. Deserteur a l'armee. Deserteur au cachot"),nl,
     write("On est d'accord?"),nl,!.
 decrire(polytech) :- temps_courant(passe),
     write("ne me parle pas je cherche un algo mal fait pour ma machine a calculer"), nl,!.
@@ -366,8 +366,9 @@ decrire(tri_par_bulle):-position(tri_par_bulle,vide),
         write("Vous le voyez ecrire des lignes de commandes"),nl,
         write("sudo Hack tri_par_bulle(liste_etu_2021_2022)> liste_triee"),nl.
 
-decrire(resultat):-write("Ce sont les resultats du tri realise sur la liste des etudiants."),nl,
-,write("je ne vois pas mon nom dessus? Ce doit etre une erreur.. n'es-ce pas?"),nl.
+decrire(resultat):-
+    write("Ce sont les resultats du tri realise sur la liste des etudiants."),nl,
+    write("je ne vois pas mon nom dessus? Ce doit etre une erreur.. n'es-ce pas?"),nl.
 %copies detudiants%
 
 
