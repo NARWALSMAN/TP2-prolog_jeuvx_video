@@ -40,9 +40,9 @@ voyage(X,Temps):-
         assert(temps_courant(Temps)),
         regarder, !.
 voyage(_,_):-write("la voiture n'est pas alimentée"), false, !. 
-%'%
+%%
 
-% position du joueur. Ce pr�dicat sera modifié au fur et a mesure de la partie (avec `retract` et `assert`)
+% position du joueur. Ce predicat sera modifié au fur et a mesure de la partie (avec `retract` et `assert`)
 position_courante(usmb_cours).
 
 %utiliser objet
