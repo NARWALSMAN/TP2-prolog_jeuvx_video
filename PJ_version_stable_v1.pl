@@ -13,7 +13,6 @@
 :- dynamic nombre_de_copie/1.
 % on remet a jours les positions des objets et du joueur
 :- retractall(position(_, _)), retractall(position_courante(_)).
-:- retractall(doloreane(_, _)), retractall(temps_courant(_)).
 :- retractall(position_objets(_, _, _)), retractall(position_courante(_)).
 
 % on declare des operateurs, pour autoriser `prendre torche` au lieu de `prendre(torche)`
@@ -21,29 +20,16 @@
 :- op(1000, fx, lacher).
 :- op(1000, fx, aller).
 
-%%nombre de copie
-hasCopie(X):-
-    nombre_de_copie(Nb),
-    Nb>X.
-updateNombreCopie(Delta):-
-    retract(nombre_de_copie(Nb)),
-    NombreCopie is Nb-1,
-    assert(nombre_de_copie(NombreCopie)),
-    NombreCopie <0,
-    updateNombreCopie(Delta),
-        fin.
-
-updateCopie(_).
-
 %Def de liste de copies%
-est_dans_liste(copies_dun_ancien_temps):-true,!.
-est_dans_liste(copies_pourraves):-true,!.
-est_dans_liste(copies_systeme_dexploitation):-true,!.
-est_dans_liste(copies_pourraves):-true,!.
-est_dans_liste(copies_grammaire_automates):-true,!.
-est_dans_liste(copies_d_algorithmique):-true,!.
-est_dans_liste(_):-write("tu ne peux pas mettre ca!"), false, !.
-%Temporalit� du joueur. Ce predicat sert a definir dans quelle timeline le joueur se trouve
+%est_dans_liste(copies_dun_ancien_temps):-true,!.
+%est_dans_liste(copies_pourraves):-true,!.
+%est_dans_liste(copies_systeme_dexploitation):-true,!.
+%est_dans_liste(copies_pourraves):-true,!.
+%est_dans_liste(copies_grammaire_automates):-true,!.
+%est_dans_liste(copies_d_algorithmique):-true,!.
+%est_dans_liste(_):-write("tu ne peux pas mettre ca!"), false, !.
+% Temporalit� du joueur. Ce predicat sert a definir dans quelle timeline
+% le joueur se trouve
 temps_courant(present).
 voyage(X,Temps):-
         temps_courant(Fromage),
@@ -51,8 +37,8 @@ voyage(X,Temps):-
         utiliser(X),
         retract(temps_courant(Fromage)),
         assert(temps_courant(Temps)),
-        regarder, !.
-voyage(_,_):-write("la voiture n'est pas alimentée"), false, !. 
+        !.
+voyage(_,_):-write("la voiture n'est pas alimentée"), false, !.
 %%
 
 % position du joueur. Ce pr�dicat sera modifié au fur et a mesure de la partie (avec `retract` et `assert`)
@@ -60,13 +46,24 @@ position_courante(usmb_cours).
 
 %utiliser objet
 utiliser(X):-
-        position(X,en_main),
-        retract(position(X, en_main)),
-        assert(position(X, vide)),
+        position_objets(X,en_main,temps_courant(present)),
+        retract(position_objets(X, en_main,temps_courant(present))),
+        assert(position_objets(X, vide,temps_courant(present))),
         !.
 utiliser(X):-
+        position_objets(X,en_main,temps_courant(futur)),
+        retract(position_objets(X, en_main,temps_courant(futur))),
+        assert(position_objets(X, vide,temps_courant(futur))),
+        !.
+utiliser(X):-
+        position_objets(X,en_main,temps_courant(passe)),
+        retract(position_objets(X, en_main,temps_courant(passe))),
+        assert(position_objets(X, vide,temps_courant(passe))),
+        !.
+
+utiliser(X):-
         write("je ne vois pas de "),
-        write(X), 
+        write(X),
         write("dans votre main"),
         !.
 
@@ -88,36 +85,29 @@ utiliser(X):-
         passage(huitB, nord,usmb_cours).
 
 % position des objets%
-%%
 %parchemin 1 2 3%
 position_objets(parchemin1,lama,temps_courant(present)).
-position_objets(parchemin2,huitB,temps_courant(futur)).
+position_objets(parchemin2,huitB,temps_courant(present)).
 position_objets(parchemin3,quattreCanton,temps_courant(passe)).
-%%
 %code secret%
-position_objets(code_secret_1, lama, passe).
-position_objets(code_secret_2, polytech, present).
+position_objets(code_secret_1,lama,temps_courant(passe)).
+position_objets(code_secret_2,polytech,temps_courant(present)).
 %modele osi
-position_objets(modele_osi, lama, present).
+position_objets(modele_osi,lama,temps_courant(present)).
 %Tri par bulle obtenu apres avoir parle du modele osi a Mgaret%
-position_objets(tri_par_bulle, lama, temps_courant(present)).
+position_objets(tri_par_bulle,lama,temps_courant(present)).
 %resultat%
-position_objets(resultat, polytech, temps_courant(futur)).
+position_objets(resultat,polytech,temps_courant(futur)).
 %copies des eleves%
 position_objets(copies_pourraves,huitB, temps_courant(present)).
 position_objets(copies_partiels_logique,quattreCanton, temps_courant(present)).
 
-position_objets(copies_grammaire_automates,huitB, temps_courant(passe)).
-position_objets(copies_systeme_dexploitation,huitB, temps_courant(passe)).
+position_objets(copies_grammaire_automates,quattreCanton, temps_courant(passe)).
+position_objets(copies_systeme_dexploitation,usmb_cours, temps_courant(passe)).
 
-position_objets(copies_partiels_logique,lama, temps_courant(futur)).
+position_objets(copies_partiels_etrs,lama, temps_courant(futur)).
 position_objets(copies_dun_ancien_temps,huitB, temps_courant(futur)).
 % ramasser un objet
-prendre(X) :-
-        position(X, en_main),
-        write("Vous lavez deja !"), nl,
-        !.
-
 %%%%%%%%%prendre et surcharges de prendre%%%%%%%%%%%
 prendre(X) :-
         position_courante(P),
@@ -181,7 +171,7 @@ aller(Direction) :-
         regarder, !.
 
 aller(_) :-
-        write("Vous ne pouvez pas aller par le."),
+        write("Vous ne pouvez pas aller par la."),
         fail.
 
 
@@ -190,21 +180,25 @@ aller(_) :-
 regarder :-
         position_courante(Place),
         decrire(Place), nl,
-        lister_objets(Place), nl.
+        lister_objets(Place).
 
 
 % afficher la liste des objets e lemplacement donne
 lister_objets(Place) :-
-        position_objets(X, Place, temps_courant(_)),
+        temps_courant(Temps),
+        position_objets(X, Place, temps_courant(Temps)),
         write("Il y a "), write(X), write(" ici."), nl,
-        fail.
-
+        decrire(X),
+        fail
+        .
 lister_objets(_).
-
 
 % fin de partie
 fin :-
-        nl, write("La partie est finie."), nl,
+        temps_courant(Temps),
+        position_objets(parchemin1,en_main,temps_courant(Temps)),
+        position_objets(parchemin2,en_main,temps_courant(Temps)),
+        write("La partie est finie."), nl,
         halt.
 
 
@@ -233,7 +227,7 @@ jouer :-
         write("est devenue la risee de la communaute universitaire dans le domaine informatique"), nl,
         write("Plus aucune entreprise ne veut proposer de projets aux futurs etudiants de L3"), nl,
         write("Votre mission, Si vous l acceptez est de parcourir les differentes epoques"), nl,
-        write("afin de retrouver les algorithmes de tri permettant d ecremer la license."), nl,nl,
+        write("afin de retrouver les algorithmes de tri permettant d ecremer la license."), nl,
         regarder.
 % descriptions des emplacements du passe
 decrire(usmb_cours) :- temps_courant(passe),
@@ -349,15 +343,10 @@ decrire(modele_osi):-position_courante(lama),temps_courant(present),
         write("ce puissant arcane n'a pas ete implemente mais decrit les loi regissant l'internet"),nl,
         write("Ce modele pourrait interesser M.Garet"),nl.
 %%Il faudrait amener lalgo de tri par bulle e hyvernat%%
-decrire(tri_par_bulle):-position_courante(lama),temps_courant(present),
+decrire(tri_par_bulle):-
         write("Cet Algorithme de tri, bien que de complexite constante n2"),nl,
         write("doit etre utilise avec jugeotte! Dans le cas contraire"),nl,
         write("la situation risquerait de degenerer"),nl.
-
-decrire(tri_par_bulle):-position(tri_par_bulle,vide),
-        write("Vous donnez l'algorithme a M.Waytal"),nl,
-        write("Vous le voyez ecrire des lignes de commandes"),nl,
-        write("sudo Hack tri_par_bulle(liste_etu_2021_2022)> liste_triee"),nl.
 
 decrire(resultat):-
     write("Ce sont les resultats du tri realise sur la liste des etudiants."),nl,
@@ -369,7 +358,7 @@ decrire(resultat):-
 decrire(copies_partiels_logique):-
         write("Ces copies sont remplies de symboles incomprehensibles."),nl,
         write("Absurde A(xor(non(non(AouBou(non(BetZxorC))))))"),nl,
-        write("Aidez-Moi!").
+       write("Aidez-Moi!").
 
 decrire(copies_pourraves):-
         write("Beeeerk! quesce-que c'est? Des maths'? Au secours..."),nl.
@@ -384,12 +373,20 @@ decrire(copies_dun_ancien_temps):-
         write("Ahh, les annees bissextiles.. je me rappelle de cette matiere.."),nl,
         write("Ce sont des copies d'info101'.. La bonne epoque"),nl.
 
-decrire(copies_d_algorithmique):-
+decrire(copies_grammaire_automates):-
         write("Ces copies sont vierges.."),nl,
         write("Les eleves ne peuvent pas avoir tous rendu feuille blanche?.."),
         write("n'es-ce pas?.. n'es-ce pas??"),nl.
-
-decrire(copies_grammaire_automates):-
-        write("Oulala j'ai jamais rien compris au regex moi!"),nl,
-        write("Vivement la fin de l'année j'en peux plus moi de tout ça.."),nl,
-        write("je préfèrerais faire une license option prolog"),nl.
+decrire(copies_partiels_etrs):-
+        write("ces copies aurait toutes pue avoir 20"), nl,
+        write("dommage moyenne 5"), nl.
+decrire(code_secret_1):-
+        write("caca1"), nl.
+decrire(code_secret_2):-
+        write("caca2"), nl.
+decrire(parchemin1):-
+        write("zizi1"),nl.
+decrire(parchemin2):-
+        write("zizi2"),nl.
+decrire(parchemin3):-
+        write("zizi3"),nl.
