@@ -381,12 +381,12 @@ decrire(copies_partiels_etrs):-
         write("ces copies aurait toutes pue avoir 20"), nl,
         write("dommage moyenne 5"), nl.
 decrire(code_secret_1):-
-        write("caca1"), nl.
+        write("011100010101011"), nl.
 decrire(code_secret_2):-
-        write("caca2"), nl.
+        write("00001110100111"), nl.
 decrire(parchemin1):-
-        write("zizi1"),nl.
+        write("le secret pour rendre les...."),nl.
 decrire(parchemin2):-
-        write("zizi2"),nl.
+        write("...eleve intelligent c'est de..."),nl.
 decrire(parchemin3):-
-        write("zizi3"),nl.
+        write("...les rendres malin"),nl.
