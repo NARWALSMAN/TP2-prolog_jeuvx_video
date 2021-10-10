@@ -225,7 +225,7 @@ jouer :-
 % descriptions des emplacements du passe
 decrire(usmb_cours) :- temps_courant(passe),
     write("vous vous retrouver en 1950"), nl,
-    write("la base est remplis de soldat"), nl,
+    write("la base est remplie de soldat"), nl,
     !
     .
 
@@ -236,11 +236,11 @@ decrire(lama) :- temps_courant(passe),position(copies_pourraves,vide),
     .
 decrire(lama) :- temps_courant(passe),
     write("vous vous trouvez dans le nouveau laboratoire scientifique dernier cri"), nl,
-    write("le flerons des mathématiques français"), nl,
-    write("vous parler a hyvernat l'étudiant qui revise ses cours de logique"), nl,
+    write("le fleuron des mathématiques françaises"), nl,
+    write("vous parler a hyvernat l'étudiant qui revise ses cours de logique du premier ordre"), nl,
     write("il vous dit qu'il est sur un projet secret"),nl,
-    write("ce projet pourrait rendre le plus null des étudiant en bosse des maths"), nl,
-    write("je connais que la moitier du code l'autre est caché avec un jeune disciple wental"), nl,
+    write("ce projet pourrait transformer le plus null des étudiant en bosse des maths"), nl,
+    write("'je ne connais que la moitier du code l'autre partie est detenue par Wayntal'"), nl,
     !
     .
 
@@ -383,4 +383,3 @@ decrire(copies_grammaire_automates):-
         write("Oulala j'ai jamais rien compris au regex moi!"),nl,
         write("Vivement la fin de l'année j'en peux plus moi de tout ça.."),nl,
         write("je préfèrerais faire une license option prolog"),nl.
-
