@@ -318,7 +318,7 @@ decrire(quattreCanton):- temps_courant(futur),
     write("defaillant au tp, defaillant a l'UE, deffaillant au semestre, defaillant a l'annee, on est d'accord?"), nl,
     write("...on est d'accord."),
     write("il vous interpelle et vous dit:"),
-    write("zizi"),
+    write("Que faites vous-ici?"), write("n'étiez vous pas defailant après les incidents ayant reduit a neant la reputation de la fac?"),
     nl,
     !.
 decrire(huitB):- temps_courant(futur),
@@ -344,6 +344,7 @@ decrire(tri_par_bulle):-position_courante(lama),temps_courant(present),
         write("Cet Algorithme de tri, bien que de complexite constante n2"),nl,
         write("doit etre utilise avec jugeotte! Dans le cas contraire"),nl,
         write("la situation risquerait de degenerer"),nl.
+
 decrire(tri_par_bulle):-position(tri_par_bulle,vide),
         write("Vous donnez l'algorithme a M.Waytal"),nl,
         write("Vous le voyez ecrire des lignes de commandes"),nl,
