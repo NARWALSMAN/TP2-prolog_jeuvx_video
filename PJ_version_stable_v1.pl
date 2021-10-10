@@ -131,8 +131,6 @@ prendre(X) :-
         decrire(X),
         !.
 
-
-
 prendre(X) :-
         write("??? Je ne vois pas de "),
         write(X),
@@ -331,6 +329,11 @@ decrire(polytech):- temps_courant(futur),
     write("polytech est devenu un champ de ruine depuis les incidents du tp3 de logique"), nl,
     write("M.Wayntal est en train de develloper une progressive Web-app pour partir d'ici"), nl,
     !.
+
+decrire(polytech):- temps_courant(futur),position(tri_par_bulle,vide),
+    write("Je vous attendais.."), nl,
+    write("Mon ordinateur à terminé les calculs.. Prends ces resultats!"), nl,
+    write("tu devrais aller voir M. Hyvernat a ton epoque immediatement"),!.
 
 decrire(modele_osi):-position_courante(lama),temps_courant(present),
         write("un modele perdu dans les ages. Selon Maitre Bauzac"),nl,
