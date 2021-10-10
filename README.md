@@ -116,7 +116,16 @@ qu'il n'y a aucun élément dans la liste qui est égale a x.
 ======================================================================================
 
 QUESTION 7: ==========================================================================
-
+2)
+Avantages:
+    - Ne parcours pas toute la liste pour dire si un élement est contenu dans une liste
+    - Empêche les récursions infini
+  Désavantage: 
+    - ne parcours que le premier élement de la liste.
+3)
+menbre/2:
+    contient1(A,[A|_]).
+    contient1(A,[_|L]) :- contient1(A,L).
 ======================================================================================
 
 QUESTION 8: ==========================================================================
